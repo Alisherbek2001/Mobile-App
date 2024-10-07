@@ -44,6 +44,7 @@ class LoginView(generics.GenericAPIView):
 
 
 class CheckUsernameView(APIView):
+    @swagger_auto_schema(request_body=UsernameCheckSerializer)
     def post(self, request, *args, **kwargs):
         serializer = UsernameCheckSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

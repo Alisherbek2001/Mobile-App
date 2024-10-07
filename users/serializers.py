@@ -49,5 +49,5 @@ class LoginSerializer(serializers.Serializer):
     
 
 class UsernameCheckSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    username = serializers.CharField(required=True)
     
