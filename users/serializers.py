@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate
 
 User = get_user_model()
@@ -9,17 +8,18 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'birth_date', 'gender', 'birth_country', 'current_country')
+        fields = ('id', 'username', 'email', 'first_name','birth_date', 'gender', 'birth_country', 'current_country')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'birth_date', 'gender', 'birth_country', 'current_country')
+        fields = ('username', 'email', 'password', 'first_name', 'birth_date', 'gender', 'birth_country', 'current_country')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User(
+            first_name = validated_data.get('first_name'),
             username=validated_data.get('username'),
             email=validated_data.get('email'),
             birth_date=validated_data.get('birth_date'),
