@@ -34,6 +34,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
 
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
@@ -74,3 +75,6 @@ class PasswordChangeSerializer(serializers.Serializer):
         if data['new_password'] != data['new_password2']:
             raise serializers.ValidationError("The two password fields didn't match.")
         return data
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
